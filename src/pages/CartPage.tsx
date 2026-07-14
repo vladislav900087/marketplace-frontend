@@ -12,7 +12,7 @@ export default function CartPage() {
     const [submittedTarget, setSubmittedTarget] = useState<string | undefined>(undefined);
 
     // order memory cell
-    const [order, setOrder] = useState<Order | null>(null);
+
     const [orderCreateLoading, setOrderCreateLoading] = useState(false);
 
     const handleAdminSearch = (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ export default function CartPage() {
         try {
             setOrderCreateLoading(true);
             const response = await api.post<Order>('/orders/add');
-            setOrder(response.data);
+
 
             if (response.data?.id) {
                 navigate(`/order/${response.data.id}`);

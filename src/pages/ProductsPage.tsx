@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 
-import type { Product, ProductProps } from '../types/product'
+import type { Product, ProductProps } from '../types/product';
 import { getSessionFromToken } from '../utilities/tokenDecoder';
 
 export default function ProductsPage() {
-    const currentUser = getSessionFromToken()
+    const currentUser = getSessionFromToken();
     const isAdmin = currentUser.role === 'admin';
 
-    // memory cells
     const [usernameInput, setUsernameInput] = useState('');
     const [submittedTarget, setSubmittedTarget] = useState<string | undefined>(undefined);
     const [products, setProducts] = useState<Product[]>([]);
@@ -17,23 +16,17 @@ export default function ProductsPage() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // user permissions
     const activeCartOwner = submittedTarget || currentUser.username;
     const canManageCart = currentUser.role === 'admin' || currentUser.username === activeCartOwner;
 
-    // form input states
-    const [newProduct, setNewProduct] = useState<ProductProps>({
-        title: '',
-        description: '',
-        price: 0,
-        currency: 'USD'
-    });
+    const [newProduct, setNewProduct] = useState<ProductProps>(
+        { title: '', description: '', price: 0, currency: 'USD' }
+    );
 
-    // business logic
     const handleAdminSearch = (e: React.FormEvent) => {
         e.preventDefault();
         setSubmittedTarget(usernameInput.trim() || undefined);
-    }
+    };
 
     const loadUserInventory = async () => {
         try {
@@ -55,7 +48,7 @@ export default function ProductsPage() {
     const handleProductAdd = async (data: ProductProps) => {
         try {
             await api.post('/products', data);
-            setNewProduct({title: '', description: '', price: 0, currency: 'USD'});
+            setNewProduct({ title: '', description: '', price: 0, currency: 'USD' });
             loadUserInventory();
         } catch (err: any) {
             const detail = err.response?.data?.detail;
@@ -70,7 +63,7 @@ export default function ProductsPage() {
             return;
         }
         await handleProductAdd(newProduct);
-    }
+    };
 
     const handleProductDelete = async (productId: number) => {
         try {
@@ -78,7 +71,7 @@ export default function ProductsPage() {
                 data: {
                     owner_username: activeCartOwner
                 }
-            })
+            });
             loadUserInventory();
         } catch (err: any) {
             const detail = err.response?.data?.detail;
@@ -86,14 +79,12 @@ export default function ProductsPage() {
         }
     };
 
-    // load them on load immediately
     useEffect(() => {
         loadUserInventory();
     }, [activeCartOwner]);
 
     return (
         <div className="page-container">
-
             {/* ADMIN SEARCH BAR CONTROLS */}
             {isAdmin && (
                 <form onSubmit={handleAdminSearch} className="admin-lookup-form">
@@ -203,7 +194,7 @@ export default function ProductsPage() {
                             </div>
 
                             {canManageCart && (
-                                <div style={{ display: 'flex', justifycontent: 'space-between', alignItems: 'center', marginTop: '16px', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
                                     <button
                                         type="button"
                                         onClick={() => navigate(`/update_product/${product.id}`)}

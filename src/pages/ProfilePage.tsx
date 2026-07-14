@@ -18,7 +18,7 @@ interface ProfileData {
 export default function ProfilePage() {
     // states and utils
     const [loading, setLoading] = useState(true);
-    const [updating, setUpdating] = useState(false);
+
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
