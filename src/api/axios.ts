@@ -1,30 +1,27 @@
-import axios from 'axios'
+import axios from 'axios';
 
-// configured api
+
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-    baseURL: 'http://127.0.0.1:8000',
-    headers: {
-        'Content-Type': 'application/json',
-        },
-
-    });
-
-// takes access token from the browser storage
+// attaches access token from browser storage to requests
 api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token');
-        if (token) { config.headers.Authorization = `Bearer ${token}` };
-        return config
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-
-        },
-    (error) => {
-        return Promise.reject(error);
-
-        }
-
-    );
-
-export default api
+export default api;
