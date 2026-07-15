@@ -56,7 +56,6 @@ export default function ProfileUpdatePage() {
         try {
             setUpdating(true);
             await api.post('/profile/update', formData);
-            setEmail(formData.email)
             alert('Profile configured and updated successfully!');
             navigate('/profile');
         } catch (err: any) {
