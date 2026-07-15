@@ -12,7 +12,7 @@ export default function ProfileUpdatePage() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
-    const [email, setEmail] = useState('');
+    const [dataChanged, setDataChanged] = useState(false);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<ProfileUpdateProps>({
@@ -42,6 +42,7 @@ export default function ProfileUpdatePage() {
             }
         } finally {
             setLoading(false);
+
         }
     };
 
@@ -54,6 +55,7 @@ export default function ProfileUpdatePage() {
         }
 
         try {
+            setDataChanged(false);
             setUpdating(true);
             await api.post('/profile/update', formData);
             setEmail(formData.email)
@@ -65,12 +67,13 @@ export default function ProfileUpdatePage() {
             setError(errMsg);
         } finally {
             setUpdating(false);
+            setDataChanged(true);
         }
     };
 
     useEffect(() => {
         handleGetCurrentUser();
-    }, [email]);
+    }, [dataChanged]);
 
     if (loading) {
         return <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>Loading context values...</div>;
