@@ -12,6 +12,7 @@ export default function ProfileUpdatePage() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<ProfileUpdateProps>({
@@ -55,6 +56,7 @@ export default function ProfileUpdatePage() {
         try {
             setUpdating(true);
             await api.post('/profile/update', formData);
+            setEmail(formData.email)
             alert('Profile configured and updated successfully!');
             navigate('/profile');
         } catch (err: any) {
@@ -68,7 +70,7 @@ export default function ProfileUpdatePage() {
 
     useEffect(() => {
         handleGetCurrentUser();
-    }, [formData.email]);
+    }, [email]);
 
     if (loading) {
         return <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>Loading context values...</div>;
