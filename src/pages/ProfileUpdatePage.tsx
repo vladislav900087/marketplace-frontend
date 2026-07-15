@@ -73,7 +73,13 @@ export default function ProfileUpdatePage() {
 
     useEffect(() => {
         handleGetCurrentUser();
-    }, [dataChanged]);
+    }, []);
+
+    if (dataChanged === true) {
+        handleGetCurrentUser();
+        setDataChanged(false);
+
+        }
 
     if (loading) {
         return <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>Loading context values...</div>;
