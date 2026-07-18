@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Marketplace Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the user interface for the Marketplace application. It provides a responsive layout for browsing products, managing a persistent shopping cart, and updating profile account credentials.
 
-Currently, two official plugins are available:
+## Core Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 18
+- TypeScript
+- Vite (Build Tool)
+- Axios (HTTP Client)
+- React Router DOM (Single Page Application Routing)
 
-## React Compiler
+## Main Features Included
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Authentication flow handling JWT access tokens stored in localStorage.
+- State-managed shopping cart with real-time price updates.
+- Profile update interface that interacts directly with the profile update API endpoints.
+- Client-side validation handling input states before dispatching network payloads.
 
-## Expanding the ESLint configuration
+## Local Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository and navigate into the directory:
+   npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. Start the local development server:
+   npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. Open your browser and navigate to the local host address provided in the terminal output (typically http://localhost:5173).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Application screenshots
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Login Page
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Login Page Screen Capture](assets/Screenshot 2026-07-18 at 11.35.08.png)
+
+### Profile Page
+![Profile Page Screen Capture](assets/Screenshot 2026-07-17 at 14.03.01.png)
+
+### Profile Settings Page
+![Profile Settings Page Screen Capture](assets/Screenshot 2026-07-17 at 14.03.05.png)
+
+### Product Catalog
+![Marketplace Dashboard Screen Capture](assets/Screenshot 2026-07-17 at 14.02.52.png)
+
+### Empty Product Cart Page 
+![Empty Product Cart Screen Capture](assets/Screenshot 2026-07-17 at 14.03.11.png)
+
+### Shopping Cart Page
+![Shopping Cart Screen Capture](assets/Screenshot 2026-07-17 at 14.03.23.png)
+
+### Order Checkout Details
+![Order Checkout Details Screen Capture](assets/Screenshot 2026-07-17 at 14.03.29.png)
+
+### Order Records History
+![Order Records History Screen Capture](assets/Screenshot 2026-07-17 at 14.03.38.png)
+
+### Light and Dark Modes
+![Light Background Theme Screen Capture](assets/Screenshot 2026-07-18 at 11.43.36.png)
+![Dark Background Theme Screen Capture](assets/Screenshot 2026-07-17 at 14.02.52.png)
+
